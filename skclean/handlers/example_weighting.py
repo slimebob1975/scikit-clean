@@ -85,7 +85,7 @@ class WeightedBagging(BaggingClassifier):
     Parameters
     ------------------
     classifier: object
-        A classifier instance supporting sklearn API. Same as `base_estimator`
+        A classifier instance supporting sklearn API. Same as `estimator`
         of scikit-learn's BaggingClassifier.
 
     detector : `BaseDetector` or None, default=None
@@ -139,16 +139,16 @@ class WeightedBagging(BaggingClassifier):
 
     @property
     def classifier(self):
-        return self.base_estimator
+        return self.estimator
 
     @classifier.setter
     def classifier(self, clf):
-        self.base_estimator = clf
+        self.estimator = clf
 
 
     def _validate_estimator(self, default=DecisionTreeClassifier()):
         super()._validate_estimator()
-        self.base_estimator_ = _WBBase(self.base_estimator_, self.replacement, self.sampling_ratio, self.conf_score_)
+        self.estimator_ = _WBBase(self.estimator_, self.replacement, self.sampling_ratio, self.conf_score_)
 
     def fit(self, X, y, conf_score=None, **kwargs):
         X, y, conf_score = _check_data_params(self, X, y, conf_score)
@@ -194,7 +194,7 @@ class Costing(BaggingClassifier):
     Parameters
     ------------------
     classifier: object
-        A classifier instance supporting sklearn API. Same as `base_estimator`
+        A classifier instance supporting sklearn API. Same as `estimator`
         of scikit-learn's BaggingClassifier.
 
     detector : `BaseDetector` or None, default=None
@@ -237,15 +237,15 @@ class Costing(BaggingClassifier):
 
     @property
     def classifier(self):
-        return self.base_estimator
+        return self.estimator
 
     @classifier.setter
     def classifier(self, clf):
-        self.base_estimator = clf
+        self.estimator = clf
 
     def _validate_estimator(self, default=DecisionTreeClassifier()):
         super()._validate_estimator()
-        self.base_estimator_ = _RSBase(self.base_estimator_, self.conf_score_)
+        self.estimator_ = _RSBase(self.estimator_, self.conf_score_)
 
     # Duplicate fit
     def fit(self, X, y, conf_score=None, **kwargs):
