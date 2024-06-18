@@ -124,7 +124,7 @@ class WeightedBagging(BaggingClassifier):
                  verbose=0):
         BaggingClassifier.__init__(
             self,
-            base_estimator=classifier,
+            estimator=classifier,
             warm_start=False,
             n_estimators=n_estimators,
             n_jobs=n_jobs,
@@ -224,7 +224,7 @@ class Costing(BaggingClassifier):
                  verbose=0):
         BaggingClassifier.__init__(
             self,
-            base_estimator=classifier,
+            estimator=classifier,
             n_estimators=n_estimators,
             warm_start=False,
             n_jobs=n_jobs,
